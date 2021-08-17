@@ -1,17 +1,7 @@
 ## Gradle
 **gradle依赖。**
-[![](https://jitpack.io/v/xslczx/SelectionAdapter.svg)](https://jitpack.io/#xslczx/SelectionAdapter)
 ```
-implementation 'com.github.xslczx:SelectionAdapter:版本号看上面'
-```
-jitpack还要求在工程根目录的`build.gradle`中添加如下：
-```
-allprojects {
-    repositories {
-        ...
-        maven { url 'https://jitpack.io' }
-    }
-}
+implementation 'io.github.xslczx:SelectionAdapter:1.0.0'
 ```
 
 基本使用
@@ -74,7 +64,7 @@ adapter.setOnItemMultiSelectListener((operation, layoutPosition, isSelected) -> 
 
 });
 adapter.setSelectMode(SelectMode.SINGLE_SELECT);
-adapter.setSelected(false, -1);
+adapter.setSelected(-1);
 adapter.clearSelected();
 adapter.reverseSelected();
 adapter.selectAll();

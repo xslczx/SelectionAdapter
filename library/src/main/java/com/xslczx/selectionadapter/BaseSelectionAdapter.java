@@ -1,9 +1,9 @@
 package com.xslczx.selectionadapter;
 
 import android.content.Context;
-import android.support.annotation.CallSuper;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.CallSuper;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ abstract class BaseSelectionAdapter<VH extends RecyclerView.ViewHolder>
     private OnItemClickListener onItemClickListener;
     private OnItemSingleSelectListener onItemSingleSelectListener;
     private OnItemMultiSelectListener onItemMultiSelectListener;
-    private SelectMode selectMode;
+    private SelectMode selectMode = SelectMode.CLICK;
     private int singleSelected = 0;
     private int maxSelectedCount = -1;
 
@@ -105,19 +105,13 @@ abstract class BaseSelectionAdapter<VH extends RecyclerView.ViewHolder>
     /**
      * 设置默认选中项，一个或多个
      */
-    public void setSelected(boolean notifyListener, int... itemPositions) {
+    public void setSelected(int... itemPositions) {
         multiSelected.clear();
         if (selectMode == SelectMode.SINGLE_SELECT) {
             singleSelected = itemPositions[0];
-            if (onItemSingleSelectListener != null && notifyListener) {
-                onItemSingleSelectListener.onSelected(singleSelected, true);
-            }
         } else {
             for (int itemPosition : itemPositions) {
                 multiSelected.add(itemPosition);
-                if (onItemMultiSelectListener != null && notifyListener) {
-                    onItemMultiSelectListener.onSelected(Operation.ORDINARY, itemPosition, true);
-                }
             }
         }
         notifyDataSetChanged();
