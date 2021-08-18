@@ -16,7 +16,6 @@ interface IAdapterDelegate<T, VH extends RecyclerView.ViewHolder> {
      * 无需在绑定数据复用的时候重新设置*
      *
      * @return itemView
-     * @see RecyclerView.Adapter#onBindViewHolder(RecyclerView.ViewHolder, int)
      */
     View getDelegateView(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent, int viewType);
 
@@ -26,7 +25,6 @@ interface IAdapterDelegate<T, VH extends RecyclerView.ViewHolder> {
      * @param t        对应位置上的数据
      * @param position position in data
      * @return viewType
-     * @see RecyclerView.Adapter#getItemViewType(int)
      */
     int getDelegateType(@NonNull T t, int position);
 
@@ -35,7 +33,6 @@ interface IAdapterDelegate<T, VH extends RecyclerView.ViewHolder> {
      *
      * @param context  Context
      * @param position position in data
-     * @see RecyclerView.Adapter#onBindViewHolder(RecyclerView.ViewHolder, int)
      */
     void convert(@NonNull Context context, @NonNull VH holder, @NonNull T t, int position);
 }
