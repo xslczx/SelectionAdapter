@@ -15,8 +15,8 @@ android {
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        versionCode VERSION_CODE.toInteger()
+        versionName VERSION_NAME
 
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         consumerProguardFiles "consumer-rules.pro"
@@ -42,55 +42,4 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }
 
-signing {
-    sign configurations.archives
-}
-
-tasks.withType(Sign) {
-    onlyIf { isReleaseVersion }
-}
-
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-            repository(url: "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
-
-            snapshotRepository(url: "https://s01.oss.sonatype.org/content/repositories/snapshots/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
-
-            pom.project {
-                name 'SelectionAdapter'
-                packaging 'aar'
-                // optionally artifactId can be defined here
-                description 'RecyclerView点击、单选、多选模式的简单封装'
-                url 'https://github.com/xslczx/SelectionAdapter'
-
-                scm {
-                    connection 'scm:git:https://github.com/xslczx/SelectionAdapter.git'
-                    developerConnection 'scm:git:https://github.com/xslczx/SelectionAdapter.git'
-                    url 'https://github.com/xslczx/SelectionAdapter'
-                }
-
-                licenses {
-                    license {
-                        name 'The Apache License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-
-                developers {
-                    developer {
-                        id 'xslczx'
-                        name 'xslczx'
-                        email 'xslczx@163.com'
-                    }
-                }
-            }
-        }
-    }
-}
+apply from: '../maven-push-aar.gradle'
