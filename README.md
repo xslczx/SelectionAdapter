@@ -1,7 +1,7 @@
 ## Gradle
 **gradle依赖。**
 ```
-implementation 'io.github.xslczx:SelectionAdapter:1.0.0'
+implementation 'io.github.xslczx:SelectionAdapter:1.0.4'
 ```
 
 基本使用
